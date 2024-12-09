@@ -1,0 +1,115 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .dashboard-box {
+            border: 2px solid red;
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.85);
+        }
+        h1, p {
+            color: red;
+        }
+
+        .next-btn {
+            padding: 10px 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .next-btn:hover {
+            background-color: darkred;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 18px; /* Increased font size */
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            border: 2px solid red;
+            margin-top: 10px;
+            width: 250px; /* Increased width */
+        }
+
+        .box {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid red;
+            color: red;
+            text-align: center;
+            font-size: 18px; /* Increased font size */
+        }
+
+        label {
+            color: red;
+            font-size: 20px; /* Increased label font size */
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: yellow;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="dashboard-box">
+        <h1>Welcome, Reverse Bypass</h1>
+        <p>Your License Key: 4841D9A035BCA910</p>
+        <p>Your Coins: <span id="coinCount">19660</span></p>
+
+        <!-- Select Game Dropdown -->
+        <div>
+            <label for="game">Select Game:</label>
+            <select id="game" name="game" onchange="this.form.submit()">
+                <option value="">Select Game</option>
+                <option value="bdg_win">BDG Win</option>
+                <option value="91_club">91 Club</option>
+                <option value="55club">55 Club</option>
+                <option value="tringa_game">Tringa Game</option>
+            </select>
+        </div>
+
+        <!-- Select Mode Dropdown -->
+        <div>
+            <label for="mode">Select Mode:</label>
+            <select id="mode" name="mode" onchange="this.form.submit()">
+                <option value="">Select Mode</option>
+                <option value="wingo">Wingo</option>
+                <option value="wingo_v2">Wingo v2</option>
+            </select>
+        </div>
+
+        <!-- Next Page Button -->
+        <form method="POST" action="">
+            <button class="next-btn" type="submit" name="next_page">Next Page</button>
+        </form>
+
+        <!-- Error Message -->
+        
+        <div class="box">
+                            <p>Click "Next Page" to proceed. 10 coins will be deducted.</p>
+                    </div>
+    </div>
+</body>
+</html>

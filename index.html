@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Surya Number Hack</title>
+	<style type="text/css">body {
+            background-color: black;
+            color: red;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            max-width: 100%;
+            padding: 0 10px;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            width: 120px;
+            height: 120px;
+            background-color: red;
+            color: white;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 10px;
+            border: 2px solid lime;
+        }
+
+        .floating-panel, .prediction-box, .status {
+            max-width: 90%;
+            padding: 15px;
+            margin: 0 auto;
+        }
+
+        .floating-panel {
+            position: fixed;
+            bottom: 10%;
+            right: 10%;
+            background-color: #000;
+            border: 2px solid lime;
+            color: white;
+            border-radius: 10px;
+            display: none;
+            z-index: 10;
+        }
+
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
+
+        .toggle-switch label {
+            margin-left: 8px;
+            color: white;
+        }
+
+        .close-btn {
+            color: red;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: right;
+        }
+
+        .status {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: red;
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .prediction-box {
+            margin-top: 15px;
+            background-color: #333;
+            border: 2px solid lime;
+            border-radius: 10px;
+            color: white;
+            display: none;
+        }
+
+        .prediction-button {
+            margin-top: 8px;
+            padding: 8px 16px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .full-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            z-index: 9999;
+        }
+
+        .hidden {
+            display: none;
+        }
+	</style>
+</head>
+<body onload="checkConnection()">
+<div class="full-screen hidden" id="offlineScreen">protected by @reversebypass</div>
+
+<h1>&nbsp;PREDICTOR</h1>
+
+<div class="container">
+<div class="buttons">
+<div class="button" onclick="togglePanel('floatingPanel')">START HACK</div>
+
+<div class="button">HOOK</div>
+</div>
+
+<div class="button prediction-button" onclick="toggleBox('predictionBox')">START PREDICTION</div>
+</div>
+
+<div class="prediction-box" id="predictionBox">
+<p id="periodNumber">Period Number:</p>
+
+<p id="timer">Timer: 00:00</p>
+<button class="prediction-button" onclick="displayResults()">SEE RESULTS</button>
+
+<p id="resultText">Result will appear here...</p>
+</div>
+
+<div class="floating-panel" id="floatingPanel">
+<h2>Ultra Mode</h2>
+
+<div class="toggle-switch"><input id="bypass1" type="checkbox"><label for="bypass1">Online</label></div>
+
+<div class="toggle-switch"><input id="bypass2" type="checkbox"><label for="bypass2">Safe Mode</label></div>
+
+<div class="toggle-switch"><input id="mainID" type="checkbox"><label for="mainID">Wingo</label></div>
+
+<div class="toggle-switch"><input id="wingoMod" type="checkbox"><label for="wingoMod">Wingo V2</label></div>
+
+<div class="close-btn" onclick="togglePanel('floatingPanel')">hide</div>
+</div>
+
+<div class="status">Reverse bypass Copyright</div>
+<script>
+        let currentPeriodNumber = '';
+        let timerInterval;
+        let resultDisplayed = false;
+
+        function checkConnection() {
+            if (!navigator.onLine) toggleBox('offlineScreen', true);
+            else startTimer();
+
+            window.addEventListener('offline', showOfflineScreen);
+            window.addEventListener('online', hideOfflineScreen);
+        }
+
+        function showOfflineScreen() {
+            document.getElementById("offlineScreen").classList.remove('hidden');
+        }
+
+        function hideOfflineScreen() {
+            document.getElementById("offlineScreen").classList.add('hidden');
+        }
+
+        function toggleBox(id, forceShow = false) {
+            const box = document.getElementById(id);
+            box.style.display = forceShow || box.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function togglePanel(id) {
+            document.getElementById(id).style.display = document.getElementById(id).style.display === 'none' ? 'block' : 'none';
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(updatePeriod, 1000);
+        }
+
+        function updatePeriod() {
+            const now = new Date();
+            const remainingSeconds = 60 - now.getSeconds();
+            const totalMinutes = now.getHours() * 60 + now.getMinutes() - 330;
+
+            const periodNum = `${now.toISOString().slice(0, 10).replace(/-/g, '')}0${10001 + ((totalMinutes + 1440) % 1440)}`;
+            document.getElementById("periodNumber").innerText = `Period Number: ${periodNum}`;
+            document.getElementById("timer").innerText = `Timer: 00:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+
+            if (currentPeriodNumber !== periodNum) {
+                currentPeriodNumber = periodNum;
+                resultDisplayed = false;
+                document.getElementById("resultText").innerText = 'Result will appear here...';
+            }
+        }
+
+        function displayResults() {
+            if (!navigator.onLine) return alert("check your internet connection.");
+            if (resultDisplayed) {
+                document.getElementById("resultText").innerText = "Wait for new period number";
+            } else {
+                calculateResult();
+            }
+        }
+
+        function calculateResult() {
+            document.getElementById("resultText").innerText = "Calculating...";
+            setTimeout(() => {
+                document.getElementById("resultText").innerText = `Result: ${Math.random() < 0.5 ? "Big" : "Small"}`;
+                resultDisplayed = true;
+            }, 3000);
+        }
+    </script>
+</body></html>
